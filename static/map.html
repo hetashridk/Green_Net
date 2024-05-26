@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Head content -->
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const latitude = urlParams.get('latitude');
+    const longitude = urlParams.get('longitude');
+    console.log(window.location)
+    console.log(latitude);
+    console.log(longitude);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (latitude !== null && longitude !== null){
+
+        const center = [parseFloat(latitude), parseFloat(longitude)];
+        const map = L.map('map', {
+          crs: L.CRS.EPSG3857,
+          minZoom: 5
+        }).setView(center, 5);
+  
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 16,
+          minZoom: 5,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+  
+        const wmsOptions = {
+          layers: 'NDVI',
+          transparent: true,
+          format: 'image/png',
+          maxcc: 20,
+          time: '2022-01-01/2022-12-31',
+          attribution: '&copy; <a href="https://www.sentinel-hub.com">Sentinel Hub</a>',
+          styles: 'INDEX'
+        };
+  
+        const wmsLayer = L.tileLayer.wms('https://services.sentinel-hub.com/ogc/wms/8d759ba6-0717-4467-ae5d-05e7ee796229', wmsOptions);
+        wmsLayer.setOpacity(1);
+        wmsLayer.addTo(map);
+      }
+      else{
+        console.error("Coordinates Missing");
+      }
+    });
+  </script>
+</body>
+</html>
+
