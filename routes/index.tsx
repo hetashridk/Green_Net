@@ -16,7 +16,7 @@ export default function () {
               <img
                 loading="lazy"
                 class="h-40 md:h-72 scale-90 mb-2 my-1 mx-auto w-auto"
-                src="/logo.webp"
+                src="/Logo.png"
                 alt="hero"
               />
             </div>

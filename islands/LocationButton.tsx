@@ -1,7 +1,8 @@
 
 'use client'
 // imports
-import { useState } from "https://deno.land/x/std@0.126.0/fmt/colors.ts";
+// import { useState } from "https://deno.land/x/std@0.126.0/fmt/colors.ts";
+import { isLoading } from "../store.ts";
 
 // Props Type
 interface LocationData {
@@ -29,13 +30,13 @@ export default function LocationButton(
   { latitude, longitude, name, country }: LocationData,
 ) {
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   /**
    * Fetched data for location
    */
   const handleLocation = async () => {
-    setLoading(true);
+    isLoading.value = true;
     try {
       const response = await fetch('/api', {
         method: "POST",
@@ -50,7 +51,7 @@ export default function LocationButton(
     } catch (error) {
       alert(error);
     } finally {
-      setLoading(false);
+      isLoading.value = false;
     }
     // console.log(window.location);
     console.log(window);

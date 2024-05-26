@@ -83,7 +83,7 @@ export default function Results({ data, latitude, longitude }: PageProps<PlantDa
               </div>
             </div>
             {/* Share Button  */}
-            <ShareButton />
+            {/* <ShareButton /> */}
           </div>
         </div>
       </div>
