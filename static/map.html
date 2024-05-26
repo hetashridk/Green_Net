@@ -15,6 +15,9 @@
     console.log(window.location)
     console.log(latitude);
     console.log(longitude);
+    s_key=Deno.env.get("SENTINEL_HUB_API_KEY") ?? ""
+    console.log(s_key);
+
 
     document.addEventListener('DOMContentLoaded', () => {
       if (latitude !== null && longitude !== null){
