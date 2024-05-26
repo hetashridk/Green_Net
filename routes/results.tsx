@@ -88,7 +88,7 @@ export default function Results({ data }: PageProps<ResultsProps>) {
               </div>
             </div>
             {/* Share Button  */}
-            <ShareButton />
+            {/* <ShareButton /> */}
           </div>
         </div>
       </div>

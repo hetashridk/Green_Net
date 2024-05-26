@@ -15,8 +15,8 @@
     console.log(window.location)
     console.log(latitude);
     console.log(longitude);
-    s_key=Deno.env.get("SENTINEL_HUB_API_KEY") ?? ""
-    console.log(s_key);
+    // s_key=Deno.env.get("SENTINEL_HUB_API_KEY") ?? ""
+    // console.log(s_key);
 
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -25,12 +25,12 @@
         const center = [parseFloat(latitude), parseFloat(longitude)];
         const map = L.map('map', {
           crs: L.CRS.EPSG3857,
-          minZoom: 10
+          minZoom: 17
         }).setView(center, 5);
   
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 16,
-          minZoom: 5,
+          maxZoom: 25,
+          minZoom: 17,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
   
