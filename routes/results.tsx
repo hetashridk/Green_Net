@@ -1,20 +1,8 @@
-
-'use client'
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import ShareButton from "../islands/ShareButton.tsx";
 
-// Results Type
-interface PlantData {
-  emoji: string;
-  name: string;
-  note: string;
-  growth_time: string;
-}
 
-/**
- * Validate Data
- */
 export const handler: Handlers<PlantData[]> = {
   GET(req, ctx) {
     // get data
@@ -23,7 +11,7 @@ export const handler: Handlers<PlantData[]> = {
     const latitude = url.searchParams.get("latitude") || "";
     const longitude = url.searchParams.get("longitude") || "";
 
-    // if not data redirect
+    // if no data redirect
     if (!data || data.trim().length == 0) {
       return ctx.renderNotFound();
     }
@@ -34,8 +22,8 @@ export const handler: Handlers<PlantData[]> = {
         decodeURIComponent(atob(data)),
       );
 
-      // return data
-      return ctx.render(results, latitude,longitude);
+      // return data along with latitude and longitude
+      return ctx.render({ results, latitude, longitude });
     } catch {
       return ctx.renderNotFound();
     }
@@ -45,9 +33,26 @@ export const handler: Handlers<PlantData[]> = {
 /**
  * Results page for plants
  */
-export default function Results({ data, latitude, longitude }: PageProps<PlantData[]> & { latitude: number | string; longitude: number | string; }) {
+// Results Type
+interface PlantData {
+  emoji: string;
+  name: string;
+  note: string;
+  growth_time: string;
+}
 
+// Page Props Type
+interface ResultsProps {
+  results: PlantData[];
+  latitude: string;
+  longitude: string;
+}
 
+/**
+ * Results page for plants
+ */
+export default function Results({ data }: PageProps<ResultsProps>) {
+  const { results, latitude, longitude } = data;
 
   return (
     <>
@@ -83,7 +88,7 @@ export default function Results({ data, latitude, longitude }: PageProps<PlantDa
               </div>
             </div>
             {/* Share Button  */}
-            {/* <ShareButton /> */}
+            <ShareButton />
           </div>
         </div>
       </div>
@@ -104,7 +109,7 @@ export default function Results({ data, latitude, longitude }: PageProps<PlantDa
       {/* Results Starts  */}
       <section className="my-10 grid  place-items-center">
         <div className="px-4 md:px-0 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data.map((x: PlantData) => (
+          {results.map((x: PlantData) => (
             <div className="w-full hover:shadow-2xl md:hover:scale-105 transition card py-2 md:w-96 select-none bg-base-300 shadow-xl" key={x.name}>
               <figure>
                 <h2 className="select-none text-9xl rounded-full my-1 bg-white/5 px-1.5 py-2 aspect-square">
