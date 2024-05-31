@@ -1,11 +1,8 @@
-
-
 import { Handlers } from "$fresh/server.ts";
 import { LocationScheme } from "../../islands/SearchForLocation.tsx";
 import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai@0.1.3";
 
 const genAI = new GoogleGenerativeAI(Deno.env.get("API_KEY") ?? "");
-
 const PROMPT = `Act as a farmer, botanist, and help suggest at least 1 or max 10 vegetables, fruits, or any other plants that can be grown with a minimum time span. Make sure to analyze weather data below of the location and suggest plantation that can be grown well in that weather. include plant name, type of it, growth time, emoji & extra medium-length note for it, in JSON Array format following scheme below, without including it in code block.
   FOLLOW THIS SCHEME:-
   {
