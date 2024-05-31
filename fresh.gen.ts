@@ -10,6 +10,7 @@ import * as $index from "./routes/index.tsx";
 import * as $results from "./routes/results.tsx";
 import * as $Loading from "./islands/Loading.tsx";
 import * as $LocationButton from "./islands/LocationButton.tsx";
+import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $SearchForLocation from "./islands/SearchForLocation.tsx";
 import * as $ShareButton from "./islands/ShareButton.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -26,6 +27,7 @@ const manifest = {
   islands: {
     "./islands/Loading.tsx": $Loading,
     "./islands/LocationButton.tsx": $LocationButton,
+    "./islands/MapIsland.tsx": $MapIsland,
     "./islands/SearchForLocation.tsx": $SearchForLocation,
     "./islands/ShareButton.tsx": $ShareButton,
   },
